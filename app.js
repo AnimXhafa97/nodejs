@@ -60,12 +60,48 @@
 //
 // var read = fs.readFileSync('read.txt', 'utf8') //will fully read the file before continuing to execute code
 // fs.writeFileSync('writeMe.txt', read)
+//
+// var fs = require('fs') //set variable name equal to module name when requiring modules
+//
+// //this is async, so log test is executed first
+// fs.readFile('read.txt', 'utf8', function(err, data) {
+//   console.log(data);
+// })
+//
+// console.log('test');
+//
 
-var fs = require('fs') //set variable name equal to module name when requiring modules
+// var http = require('http')
+//
+// var server = http.createServer(function(req, res) {
+//   console.log('request was made' + req.url);
+//   res.writeHead(200, {'Content-Type': 'text/plain'})
+//   res.end('Hey Slimes!')
+// })
+//
+// server.listen(3000, '127.0.0.1')
+// console.log('yo dawgs, now listening to port 3000');
 
-//this is async, so log test is executed first
-fs.readFile('read.txt', 'utf8', function(err, data) {
-  console.log(data);
+var http = require('http')
+var fs = require('fs')
+
+var server = http.createServer(function(req, res) {
+  console.log('request was made' + req.url);
+  res.writeHead(200, {'Content-Type': 'application/json'})
+  var myObj = {
+    name: 'Ryu',
+    occupation: 'ninja',
+    age: 29
+  }
+
+  res.end(JSON.stringify(myObj))
 })
 
-console.log('test');
+// var myReadStream = fs.createReadStream(__dirname + '/read.txt', 'utf8')
+// var myWriteStream = fs.createWriteStream(__dirname + '/writeMe.txt')
+//
+// myReadStream.pipe(myWriteStream)
+// myReadStream.on('data', function(chunk) {
+//   console.log('new chunk of data received: ');
+//   myWriteStream.write(chunk)
+// })
